@@ -63,7 +63,7 @@ function ConvertHandler() {
       result = 'Invalid Unit';
     }
 
-    console.log(result);
+    // console.log(result);
     //return result
     return result;
   };
@@ -150,7 +150,7 @@ function ConvertHandler() {
       result = initNum / miToKm;
     }
     
-    console.log(result);
+    // console.log(result);
     return result;
   };
   
