@@ -16,7 +16,26 @@ function ConvertHandler() {
     //determine index of where non-numeric input starts
     let indexWhereUnitBegins = result.search('[a-zA-Z]');
     //disgard all characters that come BEFORE that index
-    result = parseFloat( result.substring(0,indexWhereUnitBegins) );
+    result = result.substring(0,indexWhereUnitBegins);
+    //handle fractions
+      //determine if there is a divide
+      if(result.includes('/')) {
+        const indexOfDivideOperator = result.indexOf('/');
+        //identify what the numerator is
+        const numerator = result.substring(0,indexOfDivideOperator);
+        //identify what the denominator is
+        const denominator = result.substring(indexOfDivideOperator + 1);
+        //divide the two numbers
+        result = numerator/denominator;
+      }
+    
+    result = parseFloat(result);
+    //handle inputs that are not real number inputs such as 1//2
+    if(isNaN(result)) {
+      result = 'Invalid Input'
+    }
+
+    console.log('result: ',result);
     //return result
     return result;
   };
