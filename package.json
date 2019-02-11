@@ -8,7 +8,8 @@
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
-		"test": "mocha -u tdd tests/**.js --recursive"
+		"test": "mocha -u tdd tests/**.js --recursive",
+		"prepublish": "mocha -u tdd tests/**.js --recursive"
 	},
 	"dependencies": {
 		"body-parser": "^1.18.3",
