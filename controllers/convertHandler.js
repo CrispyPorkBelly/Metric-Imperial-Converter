@@ -9,14 +9,28 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    var result;
-    
+    let result;
+    /* SPLIT THE NUMBER FROM THE UNIT */
+    //trim off leading and trailing zeroes
+    result = input.trim();
+    //determine index of where non-numeric input starts
+    let indexWhereUnitBegins = result.search('[a-zA-Z]');
+    //disgard all characters that come BEFORE that index
+    result = parseFloat( result.substring(0,indexWhereUnitBegins) );
+    //return result
     return result;
   };
   
   this.getUnit = function(input) {
-    var result;
-    
+    let result;
+    /* SPLIT THE NUMBER FROM THE UNIT */
+    //trim off leading and trailing zeroes
+    result = input.trim();
+    //determine index of where non-numeric input starts
+    let indexWhereUnitBegins = result.search('[a-zA-Z]');
+    //disgard all characters that come AFTER that index
+    result = result.substring(indexWhereUnitBegins);
+    //return result
     return result;
   };
   
