@@ -13,6 +13,17 @@ function ConvertHandler() {
     /* SPLIT THE NUMBER FROM THE UNIT */
     //trim off leading and trailing zeroes
     result = input.trim();
+    //handle inputs that are not real number inputs such as 1..2
+    let inputArray = input.split('');
+    let periodCounter = 0;
+    for(let i = 0; i < inputArray.length; i++) {
+      if(inputArray[i] === '.') {
+        periodCounter++;
+      }
+    }
+    if(periodCounter > 1) {
+      return result = 'Invalid Input';
+    }
     //determine index of where non-numeric input starts
     let indexWhereUnitBegins = result.search('[a-zA-Z]');
     //disgard all characters that come BEFORE that index
@@ -69,9 +80,16 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
 
-    switch(initUnit) {
+    var result;
+    //if initUnit had an issue, do not attempt to get return unit
+    if(initUnit === 'Invalid Unit') {
+      return result = 'Invalid Unit';
+    }
+
+    const initUnitLowerCase = initUnit.toLowerCase();
+
+    switch(initUnitLowerCase) {
       case 'gal':
       result = 'l';
       break;
@@ -129,6 +147,14 @@ function ConvertHandler() {
   };
   
   this.convert = function(initNum, initUnit) {
+    if(initNum === 'Invalid Input') {
+      return result = 'Invalid Input';
+    }
+
+    if(initUnit === 'Invalid Unit') {
+      return result = 'Invalid Unit';
+    }
+
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
@@ -148,6 +174,8 @@ function ConvertHandler() {
       result = initNum * miToKm;
     } else if (initUnitVar === 'km') {
       result = initNum / miToKm;
+    } else {
+      result = 'Invalid Unit';
     }
     
     // console.log(result);
@@ -155,7 +183,13 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+    var result = '';
+    //'3.1 miles converts to 5.00002 kilometers'
+    result += initNum + ' ';
+    result += initUnit + ' ';
+    result += 'converts to '
+    result += returnNum + ' ';
+    result += returnUnit;
     
     return result;
   };
