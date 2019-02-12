@@ -3,6 +3,7 @@
 var express     = require('express');
 var bodyParser  = require('body-parser');
 var expect      = require('chai').expect;
+var helmet      = require('helmet');
 var cors        = require('cors');
 
 var apiRoutes         = require('./routes/api.js');
@@ -17,6 +18,9 @@ app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+/*Use of parent helmet() will protect against X-Powered-By attacks, clickjacking, cross site scripting (XSS), MIME sniffing, opening of untrusted HTML, access via HTTP instead of HTTPS, DNS prefetching, client-side caching */
+app.use(helmet());
 
 //Index page (static HTML)
 app.route('/')
